@@ -9,31 +9,27 @@ from typing import Callable, Dict
 
 
 def setup(conf: Dict):
-    pid = conf["pid"]
+
+    net_conf = NetworkConfig(
+        [conf["sharemind"]["parties"],
+         conf["pid"]]
+    )
+    spark_conf = SparkConfig(conf["spark"]["master_url"])
+    sm_conf = SharemindCodeGenConfig(conf["code_path"])
+
+    conclave_config = CodeGenConfig(conf["workflow_name"])\
+        .with_network_config(net_conf)\
+        .with_sharemind_config(sm_conf)\
+        .with_spark_config(spark_conf)
+
     hdfs_node_name = conf["spark"]["hdfs"]["node_name"]
     hdfs_root = conf["spark"]["hdfs"]["root"]
-    spark_master_url = conf["spark"]["master_url"]
 
-    workflow_name = conf["workflow_name"]
-
-    sm_config = SharemindCodeGenConfig(conf["code_path"])
-    spark_config = SparkConfig(spark_master_url)
-
-    conclave_config = CodeGenConfig(workflow_name) \
-        .with_sharemind_config(sm_config) \
-        .with_spark_config(spark_config)
-
-    conclave_config.code_path = conf["code_path"] + workflow_name
-    conclave_config.input_path = "hdfs://{}/{}/{}".format(
-        hdfs_node_name, hdfs_root, conf["name"])
-    conclave_config.output_path = "hdfs://{}/{}/{}".format(
-        hdfs_node_name, hdfs_root, conf["name"])
-    conclave_config.pid = pid
-    conclave_config.name = workflow_name
-
-    network_config = NetworkConfig(conf["sharemind"]["parties"], pid)
-
-    conclave_config.with_network_config(network_config)
+    conclave_config.code_path = conf["code_path"]
+    conclave_config.input_path = \
+        "hdfs://{}/{}/{}".format(hdfs_node_name, hdfs_root, conf["name"])
+    conclave_config.output_path = \
+        "hdfs://{}/{}/{}".format(hdfs_node_name, hdfs_root, conf["name"])
 
     return conclave_config
 
