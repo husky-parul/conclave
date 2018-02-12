@@ -11,8 +11,8 @@ from typing import Callable, Dict
 def setup(conf: Dict):
 
     net_conf = NetworkConfig(
-        [conf["sharemind"]["parties"],
-         conf["pid"]]
+        conf["sharemind"]["parties"],
+        conf["pid"]
     )
     spark_conf = SparkConfig(conf["spark"]["master_url"])
     sm_conf = SharemindCodeGenConfig(conf["code_path"])
