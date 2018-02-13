@@ -2,9 +2,14 @@
 # Party ID
 pid: &pid 3
 workflow_name: &workflow_name !join [job-, *pid]
-name: taxi
+
 delimiter: ','
 code_path: /mnt/shared/
+delimiter: ','
+code_path: /mnt/shared/
+input_path: /mnt/shared/in3/
+output_path: /mnt/shared/out3/
+
 spark:
   hdfs:
     node_name: 'cc-spark-node-0:8020'

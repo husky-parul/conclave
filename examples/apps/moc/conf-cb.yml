@@ -2,16 +2,21 @@
 # Party ID
 pid: &pid 2
 workflow_name: &workflow_name !join [job-, *pid]
-name: taxi
+
 delimiter: ','
 code_path: /mnt/shared/
+delimiter: ','
+code_path: /mnt/shared/
+input_path: /mnt/shared/in2/
+output_path: /mnt/shared/out2/
+
 spark:
   hdfs:
     node_name: 'cb-spark-node-0:8020'
     root: /home/ubuntu
   master_url: 'spark://cb-spark-node-0:7077']
 
-sharemind:
+net:
   parties:
     - host: ca-spark-node-0
       port: 9001
