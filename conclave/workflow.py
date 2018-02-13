@@ -11,7 +11,7 @@ from typing import Callable, Dict
 def setup(conf: Dict):
 
     net_conf = NetworkConfig(
-        conf["sharemind"]["parties"],
+        conf["net"]["parties"],
         conf["pid"]
     )
     spark_conf = SparkConfig(conf["spark"]["master_url"])
@@ -27,9 +27,9 @@ def setup(conf: Dict):
 
     conclave_config.code_path = conf["code_path"]
     conclave_config.input_path = \
-        "hdfs://{}/{}/{}".format(hdfs_node_name, hdfs_root, conf["name"])
+        "hdfs://{}/{}/{}".format(hdfs_node_name, hdfs_root, conf["input_path"])
     conclave_config.output_path = \
-        "hdfs://{}/{}/{}".format(hdfs_node_name, hdfs_root, conf["name"])
+        "hdfs://{}/{}/{}".format(hdfs_node_name, hdfs_root, conf["output_path"])
 
     return conclave_config
 
