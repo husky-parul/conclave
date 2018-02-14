@@ -39,8 +39,6 @@ def config():
 
         protocol = request.files['protocol']
 
-        # TODO: pass conf & protocol to workflow.py
-
         return conf, protocol
     else:
         return "Hello"
