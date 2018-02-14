@@ -44,3 +44,7 @@ def config():
         return conf, protocol
     else:
         return "Hello"
+
+
+if __name__ == "__main__":
+    app.run()
