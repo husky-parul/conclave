@@ -10,7 +10,7 @@ import conclave.lang as sal
 from conclave.utils import *
 from conclave import workflow
 
-
+print ("*********** this is conclave path: ", sal.path)
 def protocol():
     """
     Define inputs and operations to be performed between them.
