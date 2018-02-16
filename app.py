@@ -6,11 +6,11 @@ print ("This Hi is from app.py!!")
 """
 Simple example workflow for MOC deployment of Conclave
 """
-import conclave.lang as sal
+from conclave import lang as sal
 from conclave.utils import *
 from conclave import workflow
 
-print ("*********** this is conclave path: ", sal.path)
+print ("*********** this is conclave path: ")
 def protocol():
     """
     Define inputs and operations to be performed between them.
