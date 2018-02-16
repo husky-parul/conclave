@@ -338,8 +338,11 @@ class SparkCodeGen(CodeGen):
 
     def _write_code(self, code: str, job_name: str):
         """ Write generated code to file. """
-
-        os.makedirs("{}/{}".format(self.config.code_path, job_name), exist_ok=True)
+        try:
+            original_umask = os.umask(0)
+            os.makedirs("{}/{}".format(self.config.code_path, job_name), exist_ok=True)
+        except:
+            os.umask(original_umask)
 
         # write code to a file
         pyfile = open("{}/{}/workflow.py".format(self.config.code_path, job_name), 'w')
