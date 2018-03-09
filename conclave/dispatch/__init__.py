@@ -23,7 +23,8 @@ def dispatch_all(conclave_config, networked_peer, job_queue: list):
         if not job.skip:
             try:
                 # look up dispatcher and dispatch
-                dispatchers[type(job)].dispatch(job)
+                #commented by Parul
+                #dispatchers[type(job)].dispatch(job)
             except Exception as e:
                 print(e)
         else:
