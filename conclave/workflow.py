@@ -30,6 +30,7 @@ def setup(conf: Dict):
         hdfs_node_name, hdfs_root, conf["name"])
     conclave_config.pid = pid
     conclave_config.name = workflow_name
+    conclave_config.all_pids = [int(p) for p in conf["all_pids"]]
 
     network_config = NetworkConfig(conf["sharemind"]["parties"], pid)
 
@@ -42,7 +43,7 @@ def run(protocol: Callable):
     # Parse arguments
     parser = argparse.ArgumentParser(description="Run new workflow for Conclave.")
     parser.add_argument("--conf", metavar="/config/file.yml", type=str,
-                        help="path of the config file", default="conf-ca.yml", required=False)
+                        help="path of the config file", default="conf.yml", required=False)
 
     args = parser.parse_args()
 
